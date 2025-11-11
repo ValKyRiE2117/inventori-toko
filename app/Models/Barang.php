@@ -9,14 +9,25 @@ class Barang extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'barang';
+
     protected $fillable = [
+        'supplier_id',
+        'kategori_id',
+        'kode',
         'nama',
-        'alamat',
-        'email',
+        'gambar',
+        'stok',
+        'deskripsi',
     ];
 
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 }
