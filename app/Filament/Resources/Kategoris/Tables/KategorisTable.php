@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Suppliers\Tables;
+namespace App\Filament\Resources\Kategoris\Tables;
 
+use Dom\Text;
 use Filament\Tables\Table;
 use Filament\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
@@ -11,16 +12,17 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Actions\ForceDeleteBulkAction;
 
-class SuppliersTable
+class KategorisTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('nama')->label('Nama Supplier')->sortable()->searchable(),
-                TextColumn::make('alamat')->label('Alamat Supplier')->sortable()->searchable(),
-                TextColumn::make('email')->label('Email Supplier')->sortable()->searchable(),
 
+                TextColumn::make('nama')
+                    ->label('Nama Kategori')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 TrashedFilter::make(),
