@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('penerima');
             $table->text('keterangan')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

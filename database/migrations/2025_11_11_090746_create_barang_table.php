@@ -21,9 +21,10 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_id');
             $table->integer('stok');
             $table->timestamps();
-            
+
             $table->foreign('supplier_id')->references('id')->on('supplier')->onDelete('cascade');
             $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 
