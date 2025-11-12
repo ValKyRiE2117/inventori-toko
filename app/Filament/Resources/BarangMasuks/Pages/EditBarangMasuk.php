@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Filament\Resources\BarangMasuks\Pages;
+
+use App\Filament\Resources\BarangMasuks\BarangMasukResource;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreAction;
+use Filament\Resources\Pages\EditRecord;
+
+class EditBarangMasuk extends EditRecord
+{
+    protected static string $resource = BarangMasukResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            DeleteAction::make(),
+            ForceDeleteAction::make(),
+            RestoreAction::make(),
+        ];
+    }
+}
