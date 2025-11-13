@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
@@ -45,5 +47,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function barangMasuk()
+    {
+        return $this->hasMany(BarangMasuk::class, 'id_user');
+    }
+
+    public function barangKeluar()
+    {
+        return $this->hasMany(BarangKeluar::class, 'id_user');
     }
 }
