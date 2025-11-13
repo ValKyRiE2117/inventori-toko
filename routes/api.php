@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SupplierController;
 
@@ -15,5 +16,20 @@ use App\Http\Controllers\SupplierController;
 |
 */
 
-Route::apiResource('/supplier', SupplierController::class);
-Route::apiResource('/barang', BarangController::class);
+Route::post('/login', [AuthController::class, 'login']);
+
+// Protected routes
+Route::middleware('auth:sanctum')->group(function () {
+    // Auth routes
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/user', [AuthController::class, 'user']);
+    Route::get('/tokens', [AuthController::class, 'tokens']);
+
+    // Resource routes
+    Route::apiResource('/barang', BarangController::class);
+    Route::apiResource('/supplier', SupplierController::class);
+
+    // Additional routes
+    Route::post('/barang/{id}/restore', [BarangController::class, 'restore']);
+    Route::get('/barang/low-stock', [BarangController::class, 'lowStock']);
+});
