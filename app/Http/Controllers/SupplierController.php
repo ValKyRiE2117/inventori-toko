@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use App\Http\Resources\SupplierResources;
 
 class SupplierController extends Controller
 {
@@ -12,15 +13,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $supplier = Supplier::withCount('barang')->get();
+        return SupplierResources::collection($supplier);
     }
 
     /**
@@ -35,14 +29,6 @@ class SupplierController extends Controller
      * Display the specified resource.
      */
     public function show(Supplier $supplier)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Supplier $supplier)
     {
         //
     }

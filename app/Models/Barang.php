@@ -21,6 +21,15 @@ class Barang extends Model
         'deskripsi',
     ];
 
+    protected static function booted()
+    {
+        static::saving(function ($barang) {
+            if ($barang->stok < 0) {
+                throw new \Exception("Stok barang tidak boleh minus");
+            }
+        });
+    }
+
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
@@ -34,5 +43,10 @@ class Barang extends Model
     public function barangMasuk()
     {
         return $this->hasMany(BarangMasuk::class, 'id_barang');
+    }
+
+    public function barangKeluar()
+    {
+        return $this->hasMany(BarangKeluar::class, 'id_barang');
     }
 }
