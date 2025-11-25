@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SupplierController;
 
 /*
@@ -28,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Resource routes
     Route::apiResource('/barang', BarangController::class);
     Route::apiResource('/supplier', SupplierController::class);
+    Route::apiResource('/kategori', KategoriController::class);
 
     // Additional routes
     Route::post('/barang/{id}/restore', [BarangController::class, 'restore']);
