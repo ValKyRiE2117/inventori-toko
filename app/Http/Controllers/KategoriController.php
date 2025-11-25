@@ -13,7 +13,9 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::withCount('kategori')->get();
+        // Hitung berapa barang di setiap kategori
+        $kategori = Kategori::withCount('barang')->get();
+
         return KategoriResources::collection($kategori);
     }
 
@@ -22,7 +24,13 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255'
+        ]);
+
+        $kategori = Kategori::create($validated);
+
+        return new KategoriResources($kategori);
     }
 
     /**
@@ -30,7 +38,9 @@ class KategoriController extends Controller
      */
     public function show(Kategori $kategori)
     {
-        //
+        $kategori->loadCount('barang');
+
+        return new KategoriResources($kategori);
     }
 
     /**
@@ -38,7 +48,13 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255'
+        ]);
+
+        $kategori->update($validated);
+
+        return new KategoriResources($kategori);
     }
 
     /**
@@ -46,6 +62,11 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+        $kategori->delete();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Kategori berhasil dihapus"
+        ]);
     }
 }
